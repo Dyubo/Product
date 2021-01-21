@@ -18,4 +18,4 @@ jobs:
         with:
           java-version: 11
       - name: Build with Maven
-        run: mvn -B verife --file pom.xml
+        run: mvn -B -e verife
