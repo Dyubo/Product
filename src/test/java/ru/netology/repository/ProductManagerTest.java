@@ -18,8 +18,9 @@ public class ProductManagerTest {
     private Book item2 = new Book(2, "Harry Potter", 1000, "Joanne Rowling");
     private Book item3 = new Book(3, "dot com testing", 800, "Roman Savin");
     private Smartphone item4 = new Smartphone(4, "Honor", 3000, "Chine");
-    private Smartphone item5 = new Smartphone(4, "Samsung", 2500, "Korea");
-    private Smartphone item6 = new Smartphone(4, "Nokia", 10000, "Finland");
+    private Smartphone item5 = new Smartphone(5, "Samsung", 2500, "Korea");
+    private Smartphone item6 = new Smartphone(6, "Nokia", 10000, "Finland");
+    private Smartphone item7 = new Smartphone(7, "xiaomi", 6000, "Finland");
 
     @BeforeEach
     public void setup() {
@@ -29,6 +30,7 @@ public class ProductManagerTest {
         manager.add(item4);
         manager.add(item5);
         manager.add(item6);
+        manager.add(item7);
     }
 
     @Test
@@ -47,8 +49,13 @@ public class ProductManagerTest {
 
     @Test
     public void shouldManufacturer() {
+        Product[] actual = manager.searchBy("Korea");
+        Product[] expected = new Product[]{item5};
+        assertArrayEquals(expected, actual);
+    } @Test
+    public void shouldForTwoManufacturer() {
         Product[] actual = manager.searchBy("Finland");
-        Product[] expected = new Product[]{item6};
+        Product[] expected = new Product[]{item6,item7};
         assertArrayEquals(expected, actual);
     }
 }
