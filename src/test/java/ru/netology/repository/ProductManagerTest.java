@@ -1,4 +1,54 @@
 package ru.netology.repository;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import ru.netology.manager.ProductManager;
+import ru.netology.domain.Product;
+import ru.netology.domain.Book;
+import ru.netology.domain.Smartphone;
+import ru.netology.repository.ProductRepository;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+
 public class ProductManagerTest {
+    private ProductRepository repository = new ProductRepository();
+    private ProductManager manager = new ProductManager(repository);
+    private Book item1 = new Book(1, "Lord of the Rings", 2000, "John R R Tolkien");
+    private Book item2 = new Book(2, "Harry Potter", 1000, "Joanne Rowling");
+    private Book item3 = new Book(3, "dot com testing", 800, "Roman Savin");
+    private Smartphone item4 = new Smartphone(4, "Honor", 3000, "Chine");
+    private Smartphone item5 = new Smartphone(4, "Samsung", 2500, "Korea");
+    private Smartphone item6 = new Smartphone(4, "Nokia", 10000, "Finland");
+
+    @BeforeEach
+    public void setup() {
+        manager.add(item1);
+        manager.add(item2);
+        manager.add(item3);
+        manager.add(item4);
+        manager.add(item5);
+        manager.add(item6);
+    }
+
+    @Test
+    public void shouldName() {
+        Product[] actual = manager.searchBy("Harry Potter");
+        Product[] expected = new Product[]{item2};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldAuthor() {
+        Product[] actual = manager.searchBy("Roman Savin");
+        Product[] expected = new Product[]{item3};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldManufacturer() {
+        Product[] actual = manager.searchBy("Finland");
+        Product[] expected = new Product[]{item6};
+        assertArrayEquals(expected, actual);
+    }
 }
