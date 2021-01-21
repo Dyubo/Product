@@ -17,6 +17,7 @@ public class ProductManagerTest {
     private Book item1 = new Book(1, "Lord of the Rings", 2000, "John R R Tolkien");
     private Book item2 = new Book(2, "Harry Potter", 1000, "Joanne Rowling");
     private Book item3 = new Book(3, "dot com testing", 800, "Roman Savin");
+    private Book item8 = new Book(8, "", 800, "");
     private Smartphone item4 = new Smartphone(4, "Honor", 3000, "Chine");
     private Smartphone item5 = new Smartphone(5, "Samsung", 2500, "Korea");
     private Smartphone item6 = new Smartphone(6, "Nokia", 10000, "Finland");
@@ -31,6 +32,7 @@ public class ProductManagerTest {
         manager.add(item5);
         manager.add(item6);
         manager.add(item7);
+        manager.add(item8);
     }
 
     @Test
@@ -56,6 +58,12 @@ public class ProductManagerTest {
     public void shouldForTwoManufacturer() {
         Product[] actual = manager.searchBy("Finland");
         Product[] expected = new Product[]{item6,item7};
+        assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shouldSampleEmptySet() {
+        Product[] actual = manager.searchBy("");
+        Product[] expected = new Product[]{item8};
         assertArrayEquals(expected, actual);
     }
 }
