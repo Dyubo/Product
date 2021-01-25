@@ -62,8 +62,8 @@ public class ProductManagerTest {
     }
     @Test
     public void shouldSampleEmptySet() {
-        Product[] actual = manager.searchBy("");
-        Product[] expected = new Product[]{item8};
+        Product[] actual = manager.searchBy("Null");
+        Product[] expected = new Product[0];
         assertArrayEquals(expected, actual);
     }
 }
